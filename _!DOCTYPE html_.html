@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ Capitol Paints - Paints for Perfect Finishing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #8b6914;
+            --dark: #1a1a2e;
+            --darker: #0f0f1a;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--darker);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            border-bottom: 3px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-text p {
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--gold);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.9), rgba(26, 26, 46, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a1a2e" width="1200" height="600"/><circle cx="200" cy="300" r="150" fill="%23c9a84c" opacity="0.05"/><circle cx="900" cy="200" r="200" fill="%23c9a84c" opacity="0.03"/></svg>');
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--darker);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--darker);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .section-title .divider {
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 15px auto;
+        }
+
+        /* Products Section */
+        #products {
+            background: var(--dark);
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #1e1e35, #252545);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #2a2a4a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 3rem;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .product-info .category {
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: #bbb;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .product-info .price {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .product-delete {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .admin-mode .product-delete {
+            display: block;
+        }
+
+        /* Admin Panel */
+        #admin-panel {
+            background: var(--darker);
+            border-top: 2px solid var(--gold);
+        }
+
+        .admin-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--dark);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--darker);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            color: #ccc;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .about-features li::before {
+            content: "? ";
+            color: var(--gold);
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image .logo-large {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--dark);
+        }
+
+        .contact-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            padding: 30px;
+        }
+
+        .contact-info h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .contact-item .icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            padding: 30px;
+            background: rgba(201, 168, 76, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .contact-form h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            border-top: 2px solid var(--gold);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #888;
+        }
+
+        footer .footer-logo {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s;
+            z-index: 999;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Admin Toggle */
+        .admin-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 12px 20px;
+            background: var(--gold);
+            color: var(--darker);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        /* No products message */
+        .no-products {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                justify-content: space-between;
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--darker);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 9999;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Color swatches */
+        .color-swatches {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Product added successfully!</div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="logo.png" alt="AJ Capitol Paints Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>AJ Capitol</h1>
+                    <p>Paints for Perfect Finishing</p>
+                </div>
+            </div>
+            <button class="hamburger" onclick="toggleMenu()">?</button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#admin-panel">Add Product</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>AJ Capitol Paints</h2>
+            <p>Paints for Perfect Finishing</p>
+            <p class="tagline">Premium quality paints for residential, commercial, and industrial applications. Transform your space with our vibrant, durable, and eco-friendly paint solutions.</p>
+            <a href="#products" class="btn">View Products</a>
+            <a href="#contact" class="btn btn-outline" style="margin-left: 15px;">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="section-title">
+            <h2>Our Products</h2>
+            <div class="divider"></div>
+            <p>Explore our range of premium paints and coatings</p>
+        </div>
+        <div class="products-grid" id="products-grid">
+            <!-- Products will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Admin Panel - Add Product -->
+    <section id="admin-panel">
+        <div class="section-title">
+            <h2>Add New Product</h2>
+            <div class="divider"></div>
+            <p>Post your paint products here</p>
+        </div>
+        <div class="admin-container">
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name *</label>
+                    <input type="text" id="product-name" placeholder="e.g., Premium Emulsion Paint" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Category *</label>
+                    <select id="product-category" required>
+                        <option value="">Select Category</option>
+                        <option value="Emulsion Paint">Emulsion Paint</option>
+                        <option value="Gloss Paint">Gloss Paint</option>
+                        <option value="Satin Paint">Satin Paint</option>
+                        <option value="Textured Paint">Textured Paint</option>
+                        <option value="Primer">Primer</option>
+                        <option value="Undercoat">Undercoat</option>
+                        <option value="Wood Paint">Wood Paint</option>
+                        <option value="Metal Paint">Metal Paint</option>
+                        <option value="Waterproof Paint">Waterproof Paint</option>
+                        <option value="Spray Paint">Spray Paint</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description *</label>
+                    <textarea id="product-description" placeholder="Describe your product..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Price (?)</label>
+                    <input type="text" id="product-price" placeholder="e.g., 15,000">
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Product Image</label>
+                    <input type="file" id="product-image" accept="image/*">
+                    <img id="image-preview" class="image-preview" alt="Preview">
+                </div>
+                <div class="form-group">
+                    <label>Available Colors (optional)</label>
+                    <input type="text" id="product-colors" placeholder="e.g., White, Blue, Red (comma separated)">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Add Product</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <div class="divider"></div>
+            <p>Your trusted paint partner</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Why Choose AJ Capitol Paints?</h3>
+                <p>At AJ Capitol Paints, we are committed to providing premium quality paints that deliver perfect finishing every time. With years of experience in the industry, we understand what our customers need.</p>
+                <p>Our products are designed for durability, vibrant colors, and easy application ? making them perfect for both professionals and DIY enthusiasts.</p>
+                <ul class="about-features">
+                    <li>Premium Quality Formulations</li>
+                    <li>Wide Range of Colors</li>
+                    <li>Long-Lasting Durability</li>
+                    <li>Eco-Friendly Options</li>
+                    <li>Expert Customer Support</li>
+                    <li>Affordable Pricing</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="logo.png" alt="AJ Capitol Logo" class="logo-large" onerror="this.style.background='linear-gradient(135deg, #c9a84c, #8b6914)'; this.style.display='flex'; this.alt='AJ Capitol';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <div class="divider"></div>
+            <p>Get in touch with us today</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Reach Out To Us</h3>
+                <div class="contact-item">
+                    <div class="icon"></div>
+                    <div>
+                        <strong>Phone</strong><br>
+                        <a href="tel:08030885485" style="color: var(--gold-light); text-decoration: none;">08030885485</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">??</div>
+                    <div>
+                        <strong>WhatsApp</strong><br>
+                        <a href="https://wa.me/2348030885485" style="color: var(--gold-light); text-decoration: none;">Chat with us</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">??</div>
+                    <div>
+                        <strong>Business Hours</strong><br>
+                        Mon - Sat: 8:00 AM - 6:00 PM
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">??</div>
+                    <div>
+                        <strong>Location</strong><br>
+                        Nigeria
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-logo">AJ Capitol Paints</p>
+        <p>Paints for Perfect Finishing</p>
+        <p style="margin-top: 15px; font-size: 0.9rem;">?? 08030885485</p>
+        <p style="margin-top: 20px; color: #666;">© 2026 AJ Capitol Paints. All Rights Reserved.</p>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/2348030885485?text=Hello%20AJ%20Capitol%20Paints!%20I'm%20interested%20in%20your%20products." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">??</a>
+
+    <!-- Admin Toggle Button -->
+    <button class="admin-toggle" id="admin-toggle" onclick="toggleAdmin()">?? Admin Mode</button>
+
+    <script>
+        // Product Management
+        let products = JSON.parse(localStorage.getItem('ajCapitolProducts')) || [];
+        let isAdmin = false;
+
+        // Sample products if none exist
+        if (products.length === 0) {
+            products = [
+                {
+                    id: 1,
+                    name: "Premium Emulsion Paint",
+                    category: "Emulsion Paint",
+                    description: "High-quality interior emulsion paint with excellent coverage and smooth finish. Perfect for walls and ceilings.",
+                    price: "?12,500",
+                    image: null,
+                    colors: ["#FFFFFF", "#F5F5DC", "#87CEEB", "#90EE90"]
+                },
+                {
+                    id: 2,
+                    name: "Super Gloss Paint",
+                    category: "Gloss Paint",
+                    description: "Durable high-gloss paint ideal for doors, windows, and trim. Provides a shiny, washable finish.",
+                    price: "?15,000",
+                    image: null,
+                    colors: ["#FFFFFF", "#FF0000", "#0000FF", "#008000"]
+                },
+                {
+                    id: 3,
+                    name: "Weather Shield Exterior",
+                    category: "Waterproof Paint",
+                    description: "Advanced waterproof exterior paint that protects against rain, sun, and harsh weather conditions.",
+                    price: "?18,000",
+                    image: null,
+                    colors: ["#FFFFFF", "#F5DEB3", "#D2B48C"]
+                }
+            ];
+            saveProducts();
+        }
+
+        function saveProducts() {
+            localStorage.setItem('ajCapitolProducts', JSON.stringify(products));
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            
+            if (products.length === 0) {
+                grid.innerHTML = '<div class="no-products">No products yet. Add your first product below!</div>';
+                return;
+            }
+
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <button class="product-delete" onclick="deleteProduct(${product.id})" title="Delete">?</button>
+                    <div class="product-image">
+                        ${product.image 
+                            ? `<img src="${product.image}" alt="${product.name}">` 
+                            : '??'
+                        }
+                    </div>
+                    <div class="product-info">
+                        <div class="category">${product.category}</div>
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        ${product.price ? `<div class="price">${product.price}</div>` : ''}
+                        ${product.colors && product.colors.length > 0 ? `
+                            <div class="color-swatches">
+                                ${product.colors.map(color => `<div class="color-swatch" style="background: ${color}"></div>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                renderProducts();
+                showToast('Product deleted!');
+            }
+        }
+
+        // Form Submission
+        document.getElementById('product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('product-name').value;
+            const category = document.getElementById('product-category').value;
+            const description = document.getElementById('product-description').value;
+            const price = document.getElementById('product-price').value;
+            const colorsInput = document.getElementById('product-colors').value;
+            const imagePreview = document.getElementById('image-preview');
+
+            const colors = colorsInput ? colorsInput.split(',').map(c => c.trim()) : [];
+
+            const newProduct = {
+                id: Date.now(),
+                name,
+                category,
+                description,
+                price: price ? `?${price}` : '',
+                image: imagePreview.style.display !== 'none' ? imagePreview.src : null,
+                colors
+            };
+
+            products.push(newProduct);
+            saveProducts();
+            renderProducts();
+
+            // Reset form
+            this.reset();
+            imagePreview.style.display = 'none';
+
+            showToast('Product added successfully! ?');
+            
+            // Scroll to products
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Image Preview
+        document.getElementById('product-image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('image-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Admin Toggle
+        function toggleAdmin() {
+            isAdmin = !isAdmin;
+            const btn = document.getElementById('admin-toggle');
+            const body = document.body;
+            
+            if (isAdmin) {
+                btn.textContent = '?? Admin Mode ON';
+                body.classList.add('admin-mode');
+            } else {
+                btn.textContent = '?? Admin Mode';
+                body.classList.remove('admin-mode');
+            }
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+
+        // Contact Form
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Message sent! We will contact you soon. ??');
+            this.reset();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('nav-menu').classList.remove('active');
+                }
+            });
+        });
+
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
